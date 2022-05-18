@@ -1,0 +1,214 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Permanent+Marker&family=Shadows+Into+Light&display=swap');
+body{  
+  text-align: center;
+  background-color: #f8f9fa;
+  height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header {
+  text-align: center;
+}
+
+
+
+/* NAVBAR */
+
+/* https: //coolors.co/palette/ef476f-ffd166-06d6a0-118ab2-073b4c */
+
+.nav-mystyle{
+  background-color: #06D6A0!important;
+ 
+}
+.nav-logo-font-mystyle {
+ 
+  font-family: 'Permanent Marker', cursive;
+  letter-spacing: 0.15rem;
+  font-size: 28px;
+}
+
+.navbar-brand {
+  color: #073B4C !important;
+}
+
+
+.nav-font-mystyle{
+  color: #073B4C !important;
+font-family: 'Kalam', cursive;
+  font-size: 24px;
+ /*  letter-spacing: 0.1rem; */
+}
+
+
+.btn-navbar-mystyle{
+  color: #073B4C !important;
+  font-size: small;
+}
+
+.btn-navbar-mystyle:hover, user-navbar-mystyle:hover, .nav-font-mystyle:hover , .navbar-brand:hover{
+  color: #FFD166 !important;
+}
+
+.user-navbar-mystyle{
+  font-size: 22px!important;
+  font-weight: bold;
+}
+
+/* GENERAL */
+
+p {
+  font-family: 'Kalam', cursive;
+  font-size: large;
+}
+
+.btn {
+  color: #073B4C !important;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: large;
+    letter-spacing: 0.1rem;
+    font-weight: bolder;
+}
+
+h1 {
+  color: #073B4C !important;
+  /* font-family: 'Roboto Condensed', sans-serif; */
+  font-family: 'Permanent Marker', cursive;
+}
+
+th{
+  font-family: 'Kalam', cursive;
+  font-size: larger;
+  letter-spacing: 0.1rem;
+  font-weight: 900;
+}
+
+tr{
+  font-family: 'Kalam', cursive;
+  font-size: large;
+}
+
+h5, h6{
+    font-family: 'Kalam', cursive;
+    font-size: large;
+}
+
+h3{
+    font-family: 'Kalam', cursive;
+}
+
+.btn-outline-primary{
+  border-color: #23B890!important;
+  border-width: 2px;
+  color:#23B890!important;
+ /*  --bs-btn-padding-y: .25rem!important;
+    --bs-btn-padding-x: .5rem!important;
+    --bs-btn-font-size: .75rem!important;
+    padding : 0.05rem 0.5rem!important; */
+}
+
+.btn-outline-primary:hover{
+  
+  color: #f8f9fa !important;
+  background-color: #06D6A0 !important;;
+}
+
+.btn-primary {
+  /* border-color: #118AB2 !important; */
+  border-color: #23B890 !important;
+  border-width: 2px;
+  color: #f8f9fa !important;
+  background-color: #23B890 !important;
+}
+
+.btn-primary:hover {
+
+  color: #23B890 !important;
+  background-color: #FFFFFF !important;
+  ;
+}
+
+label, .react-datepicker,  .form-control, input, .form-select, .text-danger{
+  font-family: 'Kalam', cursive;
+  font-size: large;
+}
+
+label{
+  font-size: larger;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  
+  --bs-table-accent-bg:#FFD87C;
+}
+.table-border-mystyle{
+  border: 2px solid rgb(62, 65, 53);
+}
+
+.table{
+  border-color:#FFD87C;
+  --bs-table-hover-color: #212529;
+  --bs-table-hover-bg:#FFD16650;
+  margin-bottom : 0px!important;
+}
+
+.table>thead{
+  background-color: #FFD87C;
+
+  
+  color: #073B4C;
+}
+
+tr{
+  vertical-align: middle;
+}
+
+.border-secondary, .border , .form-control, .form-select, input{
+  border-color:#86FCDC!important;
+}
+
+input{
+  border: 1px solid #86FCDC!important;
+}
+
+.form-control:disabled{
+  background-color: #D7FEF3;
+}
+
+.bg-yellow{
+background-color: #FFD16650;
+}
