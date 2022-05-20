@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import useWindowDimensions from "../utils/useWindowDimensions";
 
-const categorieToIcon = (categorie) => {
+export const categorieToIcon = (categorie) => {
   switch (categorie) {
     case "1":
       return (

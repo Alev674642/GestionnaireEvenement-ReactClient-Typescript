@@ -1,4 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Permanent+Marker&family=Shadows+Into+Light&display=swap');
+
+:root {
+  --primary-green:#06D6A0;
+  --primary-green-hover: #62ddbc;
+  --clr-white: #fff;
+  --radius: 0.25rem;
+  --transition: all 0.3s linear;
+}
+
 body{  
   text-align: center;
   background-color: #f8f9fa;
@@ -51,7 +60,7 @@ body{
 /* https: //coolors.co/palette/ef476f-ffd166-06d6a0-118ab2-073b4c */
 
 .nav-mystyle{
-  background-color: #06D6A0!important;
+  background-color: var(--primary-green)!important;
  
 }
 .nav-logo-font-mystyle {
@@ -211,4 +220,120 @@ input{
 
 .bg-yellow{
 background-color: #FFD16650;
+}
+
+/* LOADING COMPONENT */
+.cssfx-circular-progress-svg {
+  width: var(--width);
+  height: var(--height);
+  transform-origin: center;
+  animation: cssfx-circular-progress-rotate var(--duration) linear infinite;
+}
+
+.cssfx-circular-progress-circle {
+  fill: none;
+  stroke: var(--color);
+  stroke-width: 3;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: cssfx-circular-progress-dash calc(var(--duration) * 3 / 4) ease-in-out infinite;
+}
+
+@keyframes cssfx-circular-progress-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cssfx-circular-progress-dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
+}
+
+/* Visionneuse */
+
+.section-center {
+  margin: 0 0;
+  padding : 0 auto;
+  width: 90vw;
+  /* have to have a height */
+  height: 1000px;
+  max-width: 1000px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.visionneuseCard {
+  position: absolute;
+  top: 0;
+  /* left: 0; */
+  width: 100%;
+ /*  height: 100%; */
+  opacity: 0; 
+  transition: all 0.3s linear;
+}
+
+.visionneuseCard.activeSlide {
+  opacity: 1;
+  display: block;
+  transform: translateX(0);
+}
+
+.visionneuseCard.lastSlide {
+  transform: translateX(-100%);
+}
+
+.visionneuseCard.nextSlide {
+  transform: translateX(100%);
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 300px;
+  background: var(--primary-green);
+  color: var(--clr-white);
+  display: grid;
+  place-items: center;
+  border-color: transparent;
+  font-size: 1rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 10;
+  padding: 1rem 0;
+}
+
+.prev:hover,
+.next:hover {
+  background: var(--primary-green-hover);
+}
+
+.prev {
+  left: 0px;
+}
+
+.next {
+  right: 0px;
+}
+
+.imageCard{
+  max-width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
 }

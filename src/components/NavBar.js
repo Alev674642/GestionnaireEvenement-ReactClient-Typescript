@@ -89,6 +89,20 @@ export default function NavBar() {
                 </Link>
               </OverlayTrigger>
             </li>
+            <li className='nav-item active fw-bold mx-1'>
+              <OverlayTrigger
+                placement='bottom'
+                delay={{ show: 250, hide: 400 }}
+                overlay={
+                  <Tooltip id={`tooltip-right`}>
+                    Visionnez tous les évènements.
+                  </Tooltip>
+                }>
+                <Link className='nav-link nav-font-mystyle' to='/visionneuse'>
+                  Visionneuse
+                </Link>
+              </OverlayTrigger>
+            </li>
           </Nav>
           <div className='d-flex flex-column justify-content-center '>
             <p className='my-auto user-navbar-mystyle '>

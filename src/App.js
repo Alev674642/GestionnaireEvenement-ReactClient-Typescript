@@ -11,6 +11,8 @@ import AuthProvider from "./components/login/AuthProvider";
 import SignIn from "./components/login/SignIn";
 import Welcome from "./components/sorties/Welcome";
 import FormikSortie from "./components/sorties/FormikSortie";
+import VisionneuseSorties from "./components/sorties/VisionneuseEvenements";
+import VisionneuseEvenements from "./components/sorties/VisionneuseEvenements";
 
 function App() {
   return (
@@ -52,6 +54,14 @@ function App() {
                 element={
                   <RequireAuth>
                     <FormikSortie />
+                  </RequireAuth>
+                }></Route>
+              <Route
+                exact
+                path='/visionneuse'
+                element={
+                  <RequireAuth>
+                    <VisionneuseEvenements />
                   </RequireAuth>
                 }></Route>
             </Routes>

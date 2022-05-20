@@ -6,10 +6,12 @@ import TableSorties from "./TableSorties";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import FiltreSorties from "./FiltreSorties";
 import { URL_SERVER } from "../utils/Utils";
+import CircularProgress from "../utils/CircularProgress";
 
 export default function ListeSorties() {
   const [sorties, setSorties] = useState([]);
   const { setSortiesContext } = useContext(sortieContext);
+  const [loading, setLoading] = useState(true);
   let auth = useContext(AuthContext);
   const [filtres, setFiltres] = useState({
     ville: "",
@@ -22,6 +24,7 @@ export default function ListeSorties() {
   }, []);
 
   let fetchSorties = () => {
+    setLoading(true);
     fetch(URL_SERVER + "/api/sortie/", {
       method: "GET",
       headers: new Headers({
@@ -42,8 +45,12 @@ export default function ListeSorties() {
       })
       .then((data) => {
         setSortiesContext(data);
+        setLoading(false);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setLoading(false);
+        console.log(error);
+      });
   };
 
   const filtrerSortieDynamique = () => {
@@ -76,38 +83,46 @@ export default function ListeSorties() {
     return sortiesFiltreesDynamiques;
   };
 
-  return (
-    <div className='bg-light  pt-5'>
-      <div className='container'>
-        <h1 className='mb-5 fw-light'>Liste des sorties et évènements</h1>
-        <br />
-        <div>
-          <FiltreSorties
-            filtres={filtres}
-            setFiltres={setFiltres}></FiltreSorties>
-        </div>
-        <div className='table-border-mystyle'>
-          <TableSorties data={filtrerSortieDynamique(sorties)} />
-        </div>
-        <br />
+  if (loading) {
+    return (
+      <div className='bg-light '>
+        <CircularProgress className='my-5' />
+      </div>
+    );
+  } else {
+    return (
+      <div className='bg-light  pt-5'>
         <div className='container'>
-          <OverlayTrigger
-            placement='top'
-            delay={{ show: 250, hide: 400 }}
-            overlay={
-              <Tooltip id={`tooltip-right`}>
-                Cliquer pour créer un nouvel évènement.
-              </Tooltip>
-            }>
-            <Link
-              type='button'
-              className='btn btn-primary mb-5'
-              to='/formulairesortieFormik'>
-              Créér un nouvel évènement
-            </Link>
-          </OverlayTrigger>
+          <h1 className='mb-5 fw-light'>Liste des sorties et évènements</h1>
+          <br />
+          <div>
+            <FiltreSorties
+              filtres={filtres}
+              setFiltres={setFiltres}></FiltreSorties>
+          </div>
+          <div className='table-border-mystyle'>
+            <TableSorties data={filtrerSortieDynamique(sorties)} />
+          </div>
+          <br />
+          <div className='container'>
+            <OverlayTrigger
+              placement='top'
+              delay={{ show: 250, hide: 400 }}
+              overlay={
+                <Tooltip id={`tooltip-right`}>
+                  Cliquer pour créer un nouvel évènement.
+                </Tooltip>
+              }>
+              <Link
+                type='button'
+                className='btn btn-primary mb-5'
+                to='/formulairesortieFormik'>
+                Créér un nouvel évènement
+              </Link>
+            </OverlayTrigger>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
