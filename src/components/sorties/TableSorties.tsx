@@ -1,12 +1,13 @@
 import react from "react";
-import { useSortBy, useTable } from "react-table";
+import { Column, useSortBy, useTable } from "react-table";
 import BTable from "react-bootstrap/Table";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import useWindowDimensions from "../utils/useWindowDimensions";
+import Isortie from "../types/Isortie";
 
-export const categorieToIcon = (categorie) => {
+export const categorieToIcon = (categorie : string) => {
   switch (categorie) {
     case "1":
       return (
@@ -139,16 +140,20 @@ export const categorieToIcon = (categorie) => {
   }
 };
 
-export default function TableSorties({ data }) {
+interface Iprops{
+  data : Isortie[]
+}
+
+export default function TableSorties({ data } : Iprops) {
   const { width } = useWindowDimensions();
 
-  const columns = react.useMemo(() => {
+  const columns: Column<Isortie>[] = react.useMemo(() => {
     if (width > 1000) {
       return [
         {
           Header: "Categorie",
           accessor: "categorie",
-          Cell: (props) => {
+          Cell: (props : any) => {
             return <span>{categorieToIcon(props.value)}</span>;
           },
         },
@@ -163,7 +168,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Date",
           accessor: "date",
-          Cell: (props) => {
+          Cell: (props: any) => {
             const custom_date = dateFormat(props.value, "dd/mm/yyyy HH:MM");
             return <span>{custom_date}</span>;
           },
@@ -176,12 +181,12 @@ export default function TableSorties({ data }) {
         {
           Header: "Prix",
           accessor: "price",
-          Cell: ({ value }) =>
+          Cell: ({ value }: {value: any;}) =>
             value > 0 ? (
               <span>{value}€</span>
             ) : (
               <span
-                style={{ color: "green", fontWeigth: "bold" }}
+                style={{ color: "green", fontWeight: "bold" }}
                 data-bs-toggle='tooltip'
                 data-bs-placement='top'
                 title='Sortie gratuite.'>
@@ -192,7 +197,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Action",
           accessor: "_id",
-          Cell: ({ value }) => (
+          Cell: ({ value }: {value: any;}) => (
             <Link
               className='btn btn-outline-primary btn-sm mx-1 ('
               to={`/sortie/${value}`}>
@@ -203,7 +208,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Statut",
           accessor: "signalee",
-          Cell: (props) => {
+          Cell: (props: {value: any;}) => {
             return (
               <span>
                 {props.value ? (
@@ -242,7 +247,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Categorie",
           accessor: "categorie",
-          Cell: (props) => {
+          Cell: (props: {value: any;}) => {
             return <span>{categorieToIcon(props.value)}</span>;
           },
         },
@@ -257,7 +262,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Date",
           accessor: "date",
-          Cell: (props) => {
+          Cell: (props: {value: any;}) => {
             const custom_date = dateFormat(props.value, "dd/mm/yyyy HH:MM");
             return <span>{custom_date}</span>;
           },
@@ -271,7 +276,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Action",
           accessor: "_id",
-          Cell: ({ value }) => (
+          Cell: ({ value }: {value: any;}) => (
             <Link
               className='btn btn-outline-primary btn-sm mx-1 ('
               to={`/sortie/${value}`}>
@@ -290,7 +295,7 @@ export default function TableSorties({ data }) {
         {
           Header: "",
           accessor: "categorie",
-          Cell: (props) => {
+          Cell: (props: {value: any;}) => {
             return <span>{categorieToIcon(props.value)}</span>;
           },
         },
@@ -305,7 +310,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Date",
           accessor: "date",
-          Cell: (props) => {
+          Cell: (props: {value: any;}) => {
             const custom_date = dateFormat(props.value, "dd/mm/yy HH:MM");
             return <span>{custom_date}</span>;
           },
@@ -314,7 +319,7 @@ export default function TableSorties({ data }) {
         {
           Header: "Action",
           accessor: "_id",
-          Cell: ({ value }) => (
+          Cell: ({ value }: {value: any;}) => (
             <Link
               className='btn btn-outline-primary btn-sm mx-0 mx-md-1 ('
               to={`/sortie/${value}`}>

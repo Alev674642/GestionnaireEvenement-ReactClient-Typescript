@@ -126,7 +126,7 @@ export default function NavBar() {
 							<button
 								className="btn  btn-sm btn-navbar-mystyle rounded-pill"
 								onClick={() => {
-									auth.signout()
+									auth.signout(()=>{})
 								}}
 							>
 								Se déconnecter <HiOutlineLogout />

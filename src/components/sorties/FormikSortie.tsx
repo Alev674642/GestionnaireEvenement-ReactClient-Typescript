@@ -5,37 +5,48 @@ import "react-datepicker/dist/react-datepicker.css";
 import SimpleMap from "../map/SimpleMap";
 import { AuthContext } from "../login/AuthProvider";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
-import { Formik, Field, Form, ErrorMessage } from "formik";
+import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import FormikDatePicker from "./FormikDatePicker";
 import { URL_SERVER } from "../utils/Utils";
 
-export default function FormikSortie() {
+interface IformValues{
+    name: string;
+    description: string;
+    imageUrl: string;
+    date: number ;
+    categorie: string;
+    lieu: string;
+    lieu2: string;
+    price: number ;
+}
+
+export default function FormikSortie() :  JSX.Element{
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [userPseudo, setUserPseudo] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState<number>(0);
   const [message, setMessage] = useState("");
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState<number>(0);
   const [lieu, setLieu] = useState("");
   const [lieu2, setLieu2] = useState("");
-  const [categorie, setCategorie] = useState("");
+  const [categorie, setCategorie] = useState("0");
   const [signalee, setSignalee] = useState(false);
 
   const [showLinkList, setShowLinkList] = useState(" d-none");
-  const [idSortieInState, setIdSortieInState] = useState(null);
+  const [idSortieInState, setIdSortieInState] = useState("");
 
   //indique s'il s'agit d'une modification ou création
   let { idsortie } = useParams();
 
-  const { sortiesContext } = useContext(sortieContext);
+  let sortiesContext  = useContext(sortieContext).sortiesContext;
 
   let auth = useContext(AuthContext);
   let navigate = useNavigate();
 
   //SUBMIT
-  let handleSubmit = async (values) => {
+  let handleSubmit = async (values : IformValues) => {
     /*   e.preventDefault(); */
     setMessage("Formulaire en attente d'être envoyé");
     try {
@@ -89,21 +100,27 @@ export default function FormikSortie() {
   useEffect(() => {
     if (idsortie) {
       //Modification d'un évènement existant
+      //on doit retrouver l'evenement avec cet id dans le sortiesContext
       const sortieEnModification = sortiesContext.find(
         (sortie) => sortie._id === idsortie
       );
 
-      setName(sortieEnModification.name);
-      setDescription(sortieEnModification.description);
-      setImageUrl(sortieEnModification.imageUrl);
-      setUserPseudo(sortieEnModification.userPseudo);
-      setPrice(sortieEnModification.price);
-      setDate(Date.parse(sortieEnModification.date));
-      setLieu(sortieEnModification.lieu);
-      setLieu2(sortieEnModification.lieu2);
-      setCategorie(sortieEnModification.categorie);
-      setIdSortieInState(idsortie);
-      setSignalee(sortieEnModification.signalee);
+      if(sortieEnModification){
+        setName(sortieEnModification.name);
+        setDescription(sortieEnModification.description);
+        setImageUrl(sortieEnModification.imageUrl);
+        setUserPseudo(sortieEnModification.userPseudo);
+        setPrice(sortieEnModification.price);
+        setDate(Date.parse(sortieEnModification.date));
+        setLieu(sortieEnModification.lieu);
+        setLieu2(sortieEnModification.lieu2);
+        setCategorie(sortieEnModification.categorie);
+        setIdSortieInState(idsortie);
+        setSignalee(sortieEnModification.signalee);
+    }else{
+      console.log("Erreur : on ne retrouve pas l'évènement parmis le context de l'application.")
+      setUserPseudo(auth.pseudo);
+    }
     } else {
       //on renseigne User pseudo
       setUserPseudo(auth.pseudo);
@@ -130,8 +147,8 @@ export default function FormikSortie() {
 
   const locale = {
     localize: {
-      day: (n) => days[n],
-      month: (n) => months[n],
+      day: (n:number) => days[n],
+      month: (n:number) => months[n],
     },
     formatLong: {
       date: () => "mm/dd/yyyy",
@@ -151,12 +168,12 @@ export default function FormikSortie() {
           description: description ? description : "",
           imageUrl: imageUrl ? imageUrl : "",
           date: date ? date : "",
-          categorie: categorie ? categorie : "",
+          categorie: categorie ? categorie : "0",
           lieu: lieu ? lieu : "",
           lieu2: lieu2 ? lieu2 : "",
           price: price !== null ? price : "",
           /* signalee: signalee ? signalee : "", */
-        }}
+        } as IformValues}
         enableReinitialize={true}
         validationSchema={Yup.object({
           name: Yup.string()
@@ -183,7 +200,7 @@ export default function FormikSortie() {
             .required("Information indispensable"),
           date: Yup.string().required("Information indispensable"),
         })}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={(values : IformValues, { setSubmitting }: FormikHelpers<IformValues>) => {
           /*   setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
             setSubmitting(false);
@@ -251,7 +268,7 @@ export default function FormikSortie() {
                   /*  value={categorie ? categorie : "0"}
                 onChange={(e) => setCategorie(e.target.value)} */
                 >
-                  <option defaultValue value='0'></option>
+                  <option value='0'></option>
                   <option value='1'>🎬 Cinema</option>
                   <option value='2'>🍴 Restaurant</option>
                   <option value='3'>🍺 Bar</option>
@@ -363,7 +380,7 @@ export default function FormikSortie() {
                   /* className='form-control' */
                   className='form-control'
                   id='userPseudo'
-                  onChange={(e) => setUserPseudo(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserPseudo(e.target.value)}
                   value={userPseudo ? userPseudo : ""}
                   disabled></Field>
               </div>

@@ -7,16 +7,17 @@ import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import FiltreSorties from "./FiltreSorties";
 import { URL_SERVER } from "../utils/Utils";
 import CircularProgress from "../utils/CircularProgress";
+import Isortie from "../types/Isortie";
 
 export default function ListeSorties() {
-  const [sorties, setSorties] = useState([]);
+  const [sorties, setSorties] = useState<Isortie[]>([]);
   const { setSortiesContext } = useContext(sortieContext);
   const [loading, setLoading] = useState(true);
   let auth = useContext(AuthContext);
   const [filtres, setFiltres] = useState({
     ville: "",
     prixMax: -1,
-    categorie: 0,
+    categorie: "0",
   });
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export default function ListeSorties() {
       .then((response) => response.json())
       .then((data) => {
         //console.log(data);
-        data.sort((a, b) => {
+        data.sort((a:Isortie, b:Isortie) => {
           return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
         });
 
@@ -63,17 +64,15 @@ export default function ListeSorties() {
 
       if (
         filtres.prixMax !== null &&
-        filtres.prixMax !== "" &&
         filtres.prixMax > -1
       ) {
         sortiesFiltreesDynamiques = sortiesFiltreesDynamiques.filter(
           (item) => item.price <= filtres.prixMax
         );
       }
-      if (
+      if ( 
         filtres.categorie !== null &&
-        filtres.categorie !== "0" &&
-        filtres.categorie !== 0
+        filtres.categorie !== "0"
       ) {
         sortiesFiltreesDynamiques = sortiesFiltreesDynamiques.filter(
           (item) => item.categorie === filtres.categorie
@@ -101,7 +100,7 @@ export default function ListeSorties() {
               setFiltres={setFiltres}></FiltreSorties>
           </div>
           <div className='table-border-mystyle'>
-            <TableSorties data={filtrerSortieDynamique(sorties)} />
+            <TableSorties data={filtrerSortieDynamique()} />
           </div>
           <br />
           <div className='container'>

@@ -1,4 +1,5 @@
-export default function SimpleMap({ lieu }) {
+
+export default function SimpleMap({ lieu }:{lieu:string}) {
   return (
     <div className='mt-5'>
       <iframe

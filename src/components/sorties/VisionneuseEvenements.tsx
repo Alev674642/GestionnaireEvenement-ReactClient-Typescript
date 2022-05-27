@@ -7,6 +7,7 @@ import { categorieToIcon } from "./TableSorties";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import "../../App.css";
 import dateFormat from "dateformat";
+import Isortie from "../types/Isortie";
 
 export default function VisionneuseEvenements() {
   const [sorties, setSorties] = useState([]);
@@ -30,7 +31,7 @@ export default function VisionneuseEvenements() {
       .then((response) => response.json())
       .then((data) => {
         //console.log(data);
-        data.sort((a, b) => {
+        data.sort((a:Isortie, b:Isortie) => {
           return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
         });
 
@@ -57,7 +58,7 @@ export default function VisionneuseEvenements() {
     return () => clearInterval(slider);
   }, [index]);
 
-  const setArticleClass = (indexArticle) => {
+  const setArticleClass = (indexArticle:number) => {
     if (index === 0 && indexArticle === sorties.length - 1)
       return "card my-5 col-6 visionneuseCard lastSlide";
     else if (index === sorties.length - 1 && indexArticle === 0)
@@ -91,7 +92,7 @@ export default function VisionneuseEvenements() {
             }}>
             <FiChevronLeft />
           </button>
-          {sorties.map((sortie, sortieIndex) => {
+          {sorties.map((sortie : Isortie, sortieIndex) => {
             return (
               <div
                 key={sortie._id}

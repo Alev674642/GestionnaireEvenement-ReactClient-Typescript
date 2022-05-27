@@ -21,14 +21,12 @@ function App() {
 					<SortieProvider>
 						<NavBar></NavBar>
 						<Routes>
-							<Route exact path="/" element={<Welcome />}></Route>
+							<Route path="/" element={<Welcome />}></Route>
 							<Route
-								exact
 								path="/login"
 								element={<Login />}
 							></Route>
 							<Route
-								exact
 								path="/signin"
 								element={<SignIn />}
 							></Route>
@@ -50,7 +48,6 @@ function App() {
 								}
 							></Route>
 							<Route
-								exact
 								path="/formulairesortieFormik"
 								element={
 									<RequireAuth>
@@ -59,7 +56,6 @@ function App() {
 								}
 							></Route>
 							<Route
-								exact
 								path="/formulairesortie/:idsortie"
 								element={
 									<RequireAuth>
@@ -68,7 +64,6 @@ function App() {
 								}
 							></Route>
 							<Route
-								exact
 								path="/visionneuse"
 								element={
 									<RequireAuth>

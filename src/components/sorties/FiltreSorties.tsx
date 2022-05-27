@@ -1,6 +1,12 @@
 import React from "react";
+import Ifiltres from "../types/Ifiltres";
 
-export default function FiltreSorties({ filtres, setFiltres }) {
+interface Props{
+  filtres: Ifiltres, 
+  setFiltres: (arg:Ifiltres)=>void,
+}
+
+export default function FiltreSorties({ filtres, setFiltres } : Props) {
   return (
     <div className='d-flex justify-content-center '>
       <form className=' row row-cols-lg-auto gx-3 gy-2 align-items-center mb-5 '>
@@ -15,8 +21,9 @@ export default function FiltreSorties({ filtres, setFiltres }) {
             name='categorie'
             onChange={(e) => {
               setFiltres({ ...filtres, categorie: e.target.value });
-            }}>
-            <option defaultValue value='0'></option>
+            }}
+            defaultValue={'0'}>
+            <option value='0'></option>
             <option value='1'>🎬 Cinema</option>
             <option value='2'>🍴 Restaurant</option>
             <option value='3'>🍺 Bar</option>
@@ -55,7 +62,7 @@ export default function FiltreSorties({ filtres, setFiltres }) {
             className='form-control form-control-sm '
             id='filtrePrix'
             onChange={(e) => {
-              setFiltres({ ...filtres, prixMax: e.target.value });
+              setFiltres({ ...filtres, prixMax: parseFloat(e.target.value) });
             }}
           />
         </div>

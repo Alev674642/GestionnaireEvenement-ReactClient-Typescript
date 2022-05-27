@@ -5,7 +5,6 @@ const CircularProgress = ({
   color = "#06D6A0",
   width = "10em",
   height = "10em",
-  style,
   duration = "2s",
   ...others
 }) => {
@@ -15,11 +14,10 @@ const CircularProgress = ({
       crossOrigin='anonymous'
       viewBox='25 25 50 50'
       style={{
-        ...style,
-        ["--width"]: width,
-        ["--height"]: height,
-        ["--color"]: color,
-        ["--duration"]: duration,
+        width: width,
+        height: height,
+        color: color,
+      /*   duration: duration, */
       }}
       className={`cssfx-circular-progress-svg ${className}`}>
       <circle

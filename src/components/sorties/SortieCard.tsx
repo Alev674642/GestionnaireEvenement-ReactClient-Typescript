@@ -6,14 +6,15 @@ import SimpleMap from "../map/SimpleMap";
 import { AuthContext } from "../login/AuthProvider";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { URL_SERVER } from "../utils/Utils";
+import Isortie from "../types/Isortie";
 
-export default function SortieCard({ sortie }) {
+export default function SortieCard({ sortie }:{sortie : Isortie}) {
   const [message, setMessage] = useState("");
 
   let auth = useContext(AuthContext);
   let navigate = useNavigate();
 
-  const handleDelete = async (idSortie) => {
+  const handleDelete = async (idSortie: string) => {
     try {
       const url = URL_SERVER + "/api/sortie/" + idSortie;
 
@@ -40,7 +41,7 @@ export default function SortieCard({ sortie }) {
     }
   };
 
-  const handleSignalee = async (idSortie) => {
+  const handleSignalee = async (idSortie : string) => {
     try {
       const url = URL_SERVER + "/api/sortie/" + idSortie;
 
@@ -55,8 +56,8 @@ export default function SortieCard({ sortie }) {
           name: sortie.name,
           description: sortie.description,
           imageUrl: sortie.imageUrl,
-          userId: sortie.user,
-          userPseudo: sortie.pseudo,
+          userId: auth.user,
+          userPseudo: sortie.userPseudo,
           price: sortie.price,
           date: sortie.date,
           categorie: sortie.categorie,
