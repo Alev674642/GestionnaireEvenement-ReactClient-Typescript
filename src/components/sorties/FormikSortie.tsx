@@ -9,6 +9,7 @@ import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import FormikDatePicker from "./FormikDatePicker";
 import { URL_SERVER } from "../utils/Utils";
+import Isortie from "../types/Isortie";
 
 interface IformValues{
     name: string;
@@ -40,7 +41,7 @@ export default function FormikSortie() :  JSX.Element{
   //indique s'il s'agit d'une modification ou création
   let { idsortie } = useParams();
 
-  let sortiesContext  = useContext(sortieContext).sortiesContext;
+  let {sortiesContext, setSortiesContext }   = useContext(sortieContext);
 
   let auth = useContext(AuthContext);
   let navigate = useNavigate();
@@ -81,7 +82,7 @@ export default function FormikSortie() :  JSX.Element{
       if (res.status === 201) {
         setMessage("Objet créé, message du serveur : " + resJson.message);
         setIdSortieInState(resJson.newId);
-
+        fetchSorties()
         setShowLinkList("");
         navigate(`/sortie/${resJson.newId}`, { replace: true });
       } else if (res.status === 200) {
@@ -94,6 +95,30 @@ export default function FormikSortie() :  JSX.Element{
     } catch (error) {
       console.log(error);
     }
+  };
+
+  let fetchSorties = () => {
+    fetch(URL_SERVER + "/api/sortie/", {
+      method: "GET",
+      headers: new Headers({
+        authorization: "Token " + auth.token,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data);
+        data.sort((a:Isortie, b:Isortie) => {
+          return a.date > b.date ? 1 : a.date < b.date ? -1 : 0;
+        });
+        /*   filtrerSorties(); */
+        return data;
+      })
+      .then((data) => {
+        setSortiesContext(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   //USE EFFECT
