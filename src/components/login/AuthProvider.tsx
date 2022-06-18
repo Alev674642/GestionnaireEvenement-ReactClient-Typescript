@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { string } from "yup";
 
-interface AuthContext{
+interface IAuthContext{
   user: string,
   token: string,
   pseudo:string,
@@ -9,13 +8,13 @@ interface AuthContext{
   signout: (callback : ()=>any)=>any
 }
 
-interface Props{
+interface IProps{
   children: JSX.Element
 }
 
-export const AuthContext = React.createContext<AuthContext>({} as AuthContext);
+export const AuthContext = React.createContext<IAuthContext>({} as IAuthContext);
 
-export default function AuthProvider({ children }: Props) {
+export default function AuthProvider({ children }: IProps) {
   let [user, setUser] = useState<string>("");
   let [token, setToken] = useState<string>("");
   let [pseudo, setPseudo] = useState<string>("");

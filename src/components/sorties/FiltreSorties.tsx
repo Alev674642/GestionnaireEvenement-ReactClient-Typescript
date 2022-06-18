@@ -1,9 +1,8 @@
-import React from "react";
-import Ifiltres from "../types/Ifiltres";
+import IFiltres from "../types/IFiltres";
 
 interface Props{
-  filtres: Ifiltres, 
-  setFiltres: (arg:Ifiltres)=>void,
+  filtres: IFiltres, 
+  setFiltres: (arg:IFiltres)=>void,
 }
 
 export default function FiltreSorties({ filtres, setFiltres } : Props) {

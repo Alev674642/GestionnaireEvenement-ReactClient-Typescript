@@ -1,5 +1,5 @@
 import React, { useState, createContext } from "react";
-import Isortie from "../types/Isortie";
+import Isortie from "../types/ISortie";
 
 interface ISortieContext {
   sortiesContext : Isortie[],
@@ -11,14 +11,6 @@ interface ISortieContext {
 interface Iprops {
   children : React.ReactNode;
 }
-
-let initialSortieContext = {
-  sortiesContext : [],
-  setSortiesContext : null,
-  sortieEnModification : null,
-  setSortieEnModification :null,
-}
-
 
 export const sortieContext = createContext<ISortieContext>({} as ISortieContext);
 

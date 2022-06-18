@@ -5,9 +5,8 @@ import { URL_SERVER } from "../utils/Utils";
 import { sortieContext } from "./SortieProvider";
 import { categorieToIcon } from "./TableSorties";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import "../../App.css";
 import dateFormat from "dateformat";
-import Isortie from "../types/Isortie";
+import Isortie from "../types/ISortie";
 
 export default function VisionneuseEvenements() {
   const [sorties, setSorties] = useState([]);
@@ -18,6 +17,7 @@ export default function VisionneuseEvenements() {
 
   useEffect(() => {
     fetchSorties();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   let fetchSorties = () => {
@@ -56,7 +56,7 @@ export default function VisionneuseEvenements() {
       setIndex(index >= sorties.length - 1 ? 0 : index + 1);
     }, 100000);
     return () => clearInterval(slider);
-  }, [index]);
+  }, [index, sorties.length]);
 
   const setArticleClass = (indexArticle:number) => {
     if (index === 0 && indexArticle === sorties.length - 1)

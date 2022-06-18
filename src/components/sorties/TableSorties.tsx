@@ -5,7 +5,7 @@ import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import dateFormat from "dateformat";
 import useWindowDimensions from "../utils/useWindowDimensions";
-import Isortie from "../types/Isortie";
+import Isortie from "../types/ISortie";
 
 export const categorieToIcon = (categorie : string) => {
   switch (categorie) {
@@ -287,11 +287,6 @@ export default function TableSorties({ data } : Iprops) {
       ];
     } else {
       return [
-        /*  {
-            Header: "ID",
-            accessor: "_id",
-          }, */
-
         {
           Header: "",
           accessor: "categorie",
@@ -315,7 +310,6 @@ export default function TableSorties({ data } : Iprops) {
             return <span>{custom_date}</span>;
           },
         },
-
         {
           Header: "Action",
           accessor: "_id",

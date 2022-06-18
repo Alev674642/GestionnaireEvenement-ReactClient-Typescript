@@ -6,7 +6,7 @@ import SimpleMap from "../map/SimpleMap";
 import { AuthContext } from "../login/AuthProvider";
 import { Tooltip, OverlayTrigger } from "react-bootstrap";
 import { URL_SERVER } from "../utils/Utils";
-import Isortie from "../types/Isortie";
+import Isortie from "../types/ISortie";
 
 export default function SortieCard({ sortie }:{sortie : Isortie}) {
   const [message, setMessage] = useState("");

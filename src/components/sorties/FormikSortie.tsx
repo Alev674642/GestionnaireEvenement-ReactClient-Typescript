@@ -9,7 +9,7 @@ import { Formik, Field, Form, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import FormikDatePicker from "./FormikDatePicker";
 import { URL_SERVER } from "../utils/Utils";
-import Isortie from "../types/Isortie";
+import Isortie from "../types/ISortie";
 
 interface IformValues{
     name: string;
@@ -150,7 +150,7 @@ export default function FormikSortie() :  JSX.Element{
       //on renseigne User pseudo
       setUserPseudo(auth.pseudo);
     }
-  }, [idsortie]);
+  }, [idsortie,auth.pseudo,sortiesContext]);
 
   //Pb de localisation en francais du datepicker
   //cf. https://stackoverflow.com/questions/54399084/change-locale-in-react-datepicker
@@ -256,13 +256,6 @@ export default function FormikSortie() :  JSX.Element{
               <div className='col'>
                 <div className='form-group mb-3'>
                   <label htmlFor='date'>Date de l'évènement</label>
-                  {/* <input
-            type='text'
-            id='date'
-            className='form-control'
-            placeholder='Date'
-            onChange={(e) => setDate(e.target.value)}
-            value={date ? date : ""}></input> */}
                   <FormikDatePicker
                     dateFormat='dd/MM/yyyy HH:mm'
                     locale={locale}
@@ -272,10 +265,6 @@ export default function FormikSortie() :  JSX.Element{
                     timeCaption='⌚'
                     id='date'
                     name='date'
-                    /*  selected={date} */
-                    /* onChange={(date) => {
-                    setDate(date);
-                  }} */
                   />
                   <span className='text-danger'>
                     <ErrorMessage name='date' />
@@ -290,8 +279,6 @@ export default function FormikSortie() :  JSX.Element{
                   aria-label='Default select example'
                   id='categorie'
                   name='categorie'
-                  /*  value={categorie ? categorie : "0"}
-                onChange={(e) => setCategorie(e.target.value)} */
                 >
                   <option value='0'></option>
                   <option value='1'>🎬 Cinema</option>
@@ -394,7 +381,7 @@ export default function FormikSortie() :  JSX.Element{
                       ? props.values.imageUrl
                       : process.env.PUBLIC_URL + "/Calendar-unsplash.jpg"
                   }
-                  alt='Image évènement'
+                  alt='Evènement'
                   style={{ maxWidth: "100%", maxHeight: "450px" }}></img>
               </div>
 

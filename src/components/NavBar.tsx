@@ -18,11 +18,9 @@ export default function NavBar() {
 	return (
 		<Navbar
 			expand="lg"
-			/*  activeKey='/link' */
 			className="navbar-light bg-primary bg-gradient bg-opacity-25  nav-mystyle"
 		>
 			<Container>
-				{/* <FcCalendar className='fs-1 align-top' /> */}
 				<Navbar.Brand className="fs-3 ms-3 " href="/">
 					<BsCalendarCheck className="fs-1 align-top" />
 				</Navbar.Brand>
@@ -65,22 +63,7 @@ export default function NavBar() {
 								</Link>
 							</OverlayTrigger>
 						</li>
-						{/*  <li className='nav-item active fw-bold'>
-              <OverlayTrigger
-                placement='bottom'
-                delay={{ show: 250, hide: 400 }}
-                overlay={
-                  <Tooltip id={`tooltip-right`}>
-                    Créez un nouvel évènement.
-                  </Tooltip>
-                }>
-                <Link
-                  className='nav-link nav-font-mystyle'
-                  to='/formulairesortie'>
-                  Création d'un évènement
-                </Link>
-              </OverlayTrigger>
-            </li> */}
+						
 						<li className="nav-item active fw-bold mx-1">
 							<OverlayTrigger
 								placement="bottom"
@@ -133,16 +116,6 @@ export default function NavBar() {
 							</button>
 						)}
 					</div>
-					{/* <form classname='d-flex'>
-            <input
-              classname='form-control me-2'
-              type='search'
-              placeholder='Search'
-              aria-label='Search'></input>
-            <button classname='btn btn-outline-success' type='submit'>
-              Search
-            </button>
-          </form> */}
 				</Navbar.Collapse>
 			</Container>
 		</Navbar>

@@ -1,4 +1,4 @@
-export default interface Isortie{
+export default interface ISortie{
     _id : string,
     name: string,
     description: string,
